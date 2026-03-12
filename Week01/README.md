@@ -190,9 +190,9 @@ df -h /
 
 ## 排錯紀錄
 - 症狀：執行 `apt-cache policy docker-ce` 時，只顯示 `/var/lib/dpkg/status`，Docker repository 消失
-- 診斷：（你首先查了什麼？）檢查 `/etc/apt/sources.list.d/` 發現 `docker.list` 被改名為 `docker.list.broken`，APT因副檔名不正確而忽略repository
-- 修正：（做了什麼改動？）將 `docker.list.broken` 改回 `docker.list` 並重新執行 `apt update`
-- 驗證：（如何確認修正有效？）重新執行 `apt-cache policy docker-ce`，確認再次出現 `https://download.docker.com/linux/ubuntu noble/stable`
+- 診斷：檢查 `/etc/apt/sources.list.d/` 發現 `docker.list` 被改名為 `docker.list.broken`，APT因副檔名不正確而忽略repository
+- 修正：將 `docker.list.broken` 改回 `docker.list` 並重新執行 `apt update`
+- 驗證：重新執行 `apt-cache policy docker-ce`，確認再次出現 `https://download.docker.com/linux/ubuntu noble/stable`
 
 ## 設計決策
 這次實驗使用修改repository檔名作為故障注入方式，因為這個方法不會破壞docker已安裝的套件，只會影響APT套件來源，因此能安全的模擬repository設定錯誤的情境。
