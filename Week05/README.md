@@ -2,23 +2,37 @@
 
 ## Docker 環境
 
-- Storage Driver：（貼上）
-- Cgroup Version：（貼上）
-- Cgroup Driver：（貼上）
-- Default Runtime：（貼上）
+- Storage Driver: `overlayfs`
+- Cgroup Driver: `systemd`
+- Cgroup Version: `2`
+- Default Runtime: `runc`
 
 ## Namespace 觀察
 
 ### 六種 namespace 用途（用自己的話）
 - PID：
+把 process 隔離開來，容器內只能看到自己的 process，看不到 host 或其他 container 的 process。
+
 - NET：
+把網路環境隔離開來，每個 container 可以有自己的 IP、port、routing 與網卡設定。
+
 - MNT：
+把檔案系統掛載點隔離開來，container 看到的是自己的 filesystem，不會直接看到 host 的完整目錄。
+
 - UTS：
+隔離 hostname 與 domain name，container 可以有自己的 hostname。
+
 - IPC：
+隔離 process 之間的 IPC（Inter-Process Communication）機制，例如 shared memory、message queue 等。
+
 - USER：
+隔離使用者與群組 ID，可以讓 container 內的 root 不一定等於 host 的 root。
 
 ### Host vs 容器 inode 對照
-（貼上或連結 `namespace-table.md`）
+
+<img width="1084" height="505" alt="image" src="https://github.com/user-attachments/assets/c1490261-608b-4156-a967-f8781216e9d2" />
+
+<img width="803" height="372" alt="image" src="https://github.com/user-attachments/assets/0c559f32-cd9d-4959-b449-1917a24c5227" />
 
 ### 容器內 `ps aux` 輸出
 （只看到幾支 process？為什麼？）
